@@ -28,7 +28,7 @@ class Cell():
                 self.sarea = round(surf_area,7)
                 self.spikecounter = h.NetCon(self.soma(0.5)._ref_v, None, sec=self.soma)
                 self.spikecounter.threshold = 0
-                print(f'Initialized Template Cell with Surface Area = {self.sarea}cm^2')
+                print(f'Initialized {self.name} with Surface Area = {self.sarea} cm^2')
 
         def setup(self,num):
                 self.t = h.Vector()
@@ -47,7 +47,7 @@ class Cell():
                         self.record[v] = vec
                 self.spike_times = h.Vector()      
                 self.spikecounter.record(self.spike_times) 
-                print(f"( {num} / {num} ) : Created vars for {self}")
+                print(f"( {num} / {num} ) : Created vars for {self.name}")
                 print("----------------------------------------")
 
         def make_motor(self):
@@ -65,7 +65,7 @@ class Cell():
                 self.soma.insert('kdr')
                 self.soma.ek = -80 
                 self.soma.gbar_kdr = 0.15
-                print(f'( 1 / {num} ) : {self} can Spike: Added Na , K Channels')
+                print(f'( 1 / {num} ) : {self.name} can Spike: Added Na , K Channels')
                 if num == 2:
                         self.setup(num)
 
@@ -81,7 +81,7 @@ class Cell():
                 self.soma.gbar_ka = .07
                 self.soma.insert('kca')
                 self.soma.gbar_kca = .02
-                print(f'( 2 / {num} ) : {self} can Adapt: Added Capool and Cas , Ka , KCa Channels')
+                print(f'( 2 / {num} ) : {self.name} can Adapt: Added Capool and Cas , Ka , KCa Channels')
                 if num == 3:
                         self.setup(num)
 
@@ -89,7 +89,7 @@ class Cell():
                 self.make_adapt(num=num)
                 self.soma.insert('cat')
                 self.soma.gbar_cat = .007 
-                print(f'( 3 / {num} ) : {self} can Burst: Added CaT Channels')
+                print(f'( 3 / {num} ) : {self.name} can Burst: Added CaT Channels')
                 if num == 4:
                         self.setup(num)
 
@@ -98,7 +98,7 @@ class Cell():
                 self.soma.insert('hyper')
                 self.soma.eh = -20 
                 self.soma.gbar_hyper = .002 
-                print(f'( 4 / {num} ) : {self} can Oscillate: Added H Channels')
+                print(f'( 4 / {num} ) : {self.name} can Oscillate: Added H Channels')
                 self.setup(num)
 
         def plot_cell(self,xmin,xmax,cellid):
