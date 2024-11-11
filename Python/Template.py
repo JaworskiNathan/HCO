@@ -86,7 +86,7 @@ class Cell():
                         self.setup(num)
 
         def make_burst(self,num=4):
-                self.make_adapt(name,num=num)
+                self.make_adapt(num=num)
                 self.soma.insert('cat')
                 self.soma.gbar_cat = .007 
                 print(f'( 3 / {num} ) : {self} can Burst: Added CaT Channels')
@@ -94,7 +94,7 @@ class Cell():
                         self.setup(num)
 
         def make_HCO(self,num=5):
-                self.make_burst(name,num=num)
+                self.make_burst(num=num)
                 self.soma.insert('hyper')
                 self.soma.eh = -20 
                 self.soma.gbar_hyper = .002 
