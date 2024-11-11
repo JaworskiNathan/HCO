@@ -59,7 +59,6 @@ class Cell():
                 self.setup(0)
 
         def make_spike(self,num=2):
-                self.name = name
                 self.soma.insert('na')
                 self.soma.ena = 50 
                 self.soma.gbar_na = 0.3  
@@ -72,7 +71,6 @@ class Cell():
 
         def make_adapt(self,num=3):
                 self.make_spike(num=num)
-                self.name = name
                 self.soma.insert('capool')
                 self.soma.cao = 3 
                 self.soma.cai = 50e-6   
@@ -89,7 +87,6 @@ class Cell():
 
         def make_burst(self,num=4):
                 self.make_adapt(name,num=num)
-                self.name = name
                 self.soma.insert('cat')
                 self.soma.gbar_cat = .007 
                 print(f'( 3 / {num} ) : {self} can Burst: Added CaT Channels')
@@ -98,7 +95,6 @@ class Cell():
 
         def make_HCO(self,num=5):
                 self.make_burst(name,num=num)
-                self.name = name
                 self.soma.insert('hyper')
                 self.soma.eh = -20 
                 self.soma.gbar_hyper = .002 
