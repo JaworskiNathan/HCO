@@ -159,7 +159,7 @@ class Cell():
                 plt.xlabel('t (ms)')
                 plt.ylabel('f (Hz)')
                 plt.title('Spikes')
-                plt.plot()
+                plt.show()
                 
         def current_clamp(self, num, dur, d):
                 self.ccl = h.IClamp(self.soma(.5))
