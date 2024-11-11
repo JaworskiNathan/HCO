@@ -146,11 +146,7 @@ class Cell():
                                         self.s.append(round(sp,1))
                         self.isf = 1000 / self.isi
                         plt.ylim([0, max(self.isf) + 5])
-                        plt.vlines(st,0+(cellid * 5),5+(cellid * 5))
-                        notfirst = st[1:]
-                        for i,spike in enumerate(notfirst):
-                                if self.isf[i] > 5:
-                                        plt.plot(spike,self.isf[i],clro[cellid])      
+                        plt.vlines(st,25,50)
                 plt.xlabel('t (ms)')
                 plt.ylabel('f (Hz)')
                 plt.title('Spikes')
