@@ -3,17 +3,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class Cell():
-        def __init__(self,stim=0,num=0,dur=0,d=0):
-                self.name = 'Template'
+        def __init__(self,stim=0,num=0,dur=0,d=0,name = 'Template'):
+                self.name = name
                 self.s = []
                 self.soma = h.Section(name='soma',cell=self)
                 self.soma.nseg = 1	
                 self.soma.L = 1000 		 
                 self.soma.diam = 9.99593  
-                self.soma.cm = 1 # (uF/cm^2) 
+                self.soma.cm = 1
                 self.soma.insert('leak')
                 self.soma.eleak = -60
-                self.soma.gbar_leak = 0.03e-3 # (S/cm^2)
+                self.soma.gbar_leak = 0.03e-3 
                 if stim == 0:
                         self.syn = h.inhsyn(.5,sec=self.soma)
                         self.syn.esyn = -80
@@ -50,8 +50,7 @@ class Cell():
                 print(f"( {num} / {num} ) : Created vars for {self}")
                 print("----------------------------------------")
 
-        def make_motor(self , name):
-                self.name = name
+        def make_motor(self):
                 self.dsyn1 = h.inhsyn(.5,sec=self.soma)
                 self.dsyn1.esyn=-20
                 self.dsyn1.gmax = 0.01  
@@ -59,20 +58,20 @@ class Cell():
                 self.dsyn1.tau2 = 20
                 self.setup(0)
 
-        def make_spike(self,name,num=2):
+        def make_spike(self,num=2):
                 self.name = name
                 self.soma.insert('na')
                 self.soma.ena = 50 
-                self.soma.gbar_na = 0.3  # (siemens/cm^2)  
+                self.soma.gbar_na = 0.3  
                 self.soma.insert('kdr')
                 self.soma.ek = -80 
-                self.soma.gbar_kdr = 0.15 # (siemens/cm^2)
+                self.soma.gbar_kdr = 0.15
                 print(f'( 1 / {num} ) : {self} can Spike: Added Na , K Channels')
                 if num == 2:
                         self.setup(num)
 
-        def make_adapt(self,name,num=3):
-                self.make_spike(name,num=num)
+        def make_adapt(self,num=3):
+                self.make_spike(num=num)
                 self.name = name
                 self.soma.insert('capool')
                 self.soma.cao = 3 
@@ -88,7 +87,7 @@ class Cell():
                 if num == 3:
                         self.setup(num)
 
-        def make_burst(self,name,num=4):
+        def make_burst(self,num=4):
                 self.make_adapt(name,num=num)
                 self.name = name
                 self.soma.insert('cat')
@@ -97,7 +96,7 @@ class Cell():
                 if num == 4:
                         self.setup(num)
 
-        def make_HCO(self,name,num=5):
+        def make_HCO(self,num=5):
                 self.make_burst(name,num=num)
                 self.name = name
                 self.soma.insert('hyper')
